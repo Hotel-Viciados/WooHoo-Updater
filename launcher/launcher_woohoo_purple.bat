@@ -53,7 +53,7 @@ goto CHECKING_FOLDERS
 IF EXIST "%USERPROFILE%\Documents\Electronic Arts\Los Sims 4" (
     GOTO UNSAVED_FOLDER
 ) ELSE (
-    GOTO MENU
+    GOTO checking_updates
 )
 
 :checking_updates
@@ -61,6 +61,7 @@ cls
 echo Comprobando actualizaciones...
 wget --quiet --no-check-certificate "%cloudModVersionLink%" -O mods_cloud_version.txt
 set /p cloudModVersion=<mods_cloud_version.txt
+erase /q mods_cloud_version.txt
 if %localModVersion%==%cloudModVersion% (set latestMods=true) & GOTO MENU
 echo Se han encontrado actualizaciones
 :modpack_update_found
@@ -76,7 +77,7 @@ echo .  ----------------------------------------  .
 echo .  Versión disponible: %cloudModVersion%
 echo .                                            .
 echo +============================================+
-echo . [D] Descargar | [C] Changelog | [O] Omitir .
+echo . [D] Descargar - [C] Changelog - [O] Omitir .
 echo +============================================+
 choice /C dco /N /M ">"
 	if %ErrorLevel%==1 goto update_modpack
@@ -115,7 +116,7 @@ set /p savename_m1=<"%USERPROFILE%\Documents\Electronic Arts\Los Sims 4_mp1\Save
 set /p savecode_m1=<"%USERPROFILE%\Documents\Electronic Arts\Los Sims 4_mp1\SaveCode.txt"
 cls
 echo +=========================================+
-echo .     TS4  Save Manager       v%dspver%-%dspvar% .
+echo .     TS4  Save Manager     v%dspver%-%dspvar% .
 echo +=========================================+
 echo .                                         .
 echo .  1) Principal...                        .
@@ -181,18 +182,18 @@ IF %LAUNCHERSTATUS%==OK (
 	GOTO S4MP_OK 
 )
 :S4MP_FAIL
-set error_desc=El ModPack no está actualizado.
-set error_code=CRITICAL_MODPACK_NOT_UPDATED
-set error_reas=Omitiste la actualización del ModPack.
-goto error
-:S4MP_OK
-IF %latestMods%=true (
-	GOTO MODS_OK
-)
-:MODS_FAIL
 set error_desc=S4MP no está instalado.
 set error_code=MISSING_S4MP_NOT_INSTALLED
 set error_reas=S4MP no está instalado/situado en la carpeta del juego.
+goto error
+:S4MP_OK
+IF %latestMods%==true (
+	GOTO MODS_OK
+)
+:MODS_FAIL
+set error_desc=El ModPack no está actualizado.
+set error_code=CRITICAL_MODPACK_NOT_UPDATED
+set error_reas=Omitiste la actualización del ModPack.
 goto error
 :MODS_OK
 mode con:cols=43 lines=14
@@ -393,6 +394,7 @@ echo Pulsa ENTER para abrir la página de instalación
 pause >NUL
 echo Obteniendo enlace más reciente...
 wget --quiet --no-check-certificate "%hamachi_link%" -O hamachi_link.txt
+timeout 2 >NUL
 start <hamachi_link.txt
 erase /q hamachi_link.txt
 echo Pulsa ENTER cuando hayas terminado con la instalación
@@ -517,7 +519,7 @@ choice /C SN /N /M "[S] Saltar | [N] No"
 		if %ErrorLevel%==1 echo Creando datos por defecto... & mkdir "%CD%\launcher_data" & timeout 1>NUL & echo false>"%CD%\launcher_data\first_init.txt" & echo Principal>"%CD%\launcher_data\saves\singleplayer\0\SaveName.txt" & echo save0>"%CD%\launcher_data\saves\singleplayer\0\SaveCode.txt" & echo Multijugador>"%CD%\launcher_data\saves\multiplayer\0\SaveName.txt" & echo save0>"%CD%\launcher_data\saves\multiplayer\0\SaveCode.txt" & ren "%USERPROFILE%\Documents\Electronic Arts\Los Sims 4" & mkdir "%USERPROFILE%\Documents\Electronic Arts\Los Sims 4_mp0" & ren "%USERPROFILE%\Documents\Electronic Arts\Los Sims 4" "Los Sims 4_save0" & if %errorlevel%==1 mkdir "%USERPROFILE%\Documents\Electronic Arts\Los Sims 4_save0" & echo Principal>"%USERPROFILE%\Documents\Electronic Arts\Los Sims 4_save0\SaveName.txt" & echo save0>"%USERPROFILE%\Documents\Electronic Arts\Los Sims 4_save0\SaveCode.txt" & echo Multijugador>"%USERPROFILE%\Documents\Electronic Arts\Los Sims 4_mp0\SaveName.txt" & echo mp0>"%USERPROFILE%\Documents\Electronic Arts\Los Sims 4_mp0\SaveCode.txt" & goto CHECKING_FIRST_INIT
 		if %ErrorLevel%==2 mkdir "%CD%\launcher_data" & timeout 1 >NUL & echo true>"%CD%\launcher_data\first_init.txt" & goto CHECKING_FIRST_INIT
 
-:CRITICAL_MODPACK_NOT_UPDATED
+:PARSER_CRITICAL_MODPACK_NOT_UPDATED
 echo ¿Volver a buscar actualizaciones?
 choice /C SN /N /M "[S] Sí | [N] No"
 		if %ErrorLevel%==1 goto checking_updates
