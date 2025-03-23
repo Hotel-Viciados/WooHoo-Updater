@@ -25,7 +25,7 @@ pause
 exit
 
 :v1
-wget --quiet --no-check-certificate --show-progress "update-link" -O %modsPath%\update1.7z
+wget --quiet --no-check-certificate --show-progress "https://spyderrock.com/sd947391-springupdate1.7z" -O %modsPath%\update1.7z
 7za.exe x -aoa %modsPath%\update1.7z -o%modsPath%
 erase /f /q %modsPath%\update1.7z
 

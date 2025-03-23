@@ -1,11 +1,11 @@
 --- REDES HAMACHI ---
 
 RED 1
-ID   : 000-000-000
-CLAVE: 
+ID   : 489-931-828
+CLAVE: ***********
 
 RED 2
-ID   : 000-000-000
-CLAVE: 
+ID   : 490-445-488
+CLAVE: ***********
 
 Nota: Si la red está llena, prueba con la otra

@@ -8,14 +8,14 @@ color 05
 set dspver=1.0.0
 set dspvar=woohoo
 set colvar=purple
-set github_link=https://github.com/Hotel-Viciados/WooHoo-Updater
-set error_wiki_link=https://github.com/Hotel-Viciados/WooHoo-Updater/blob/main/error_codes.md#
-set changeLogLink=https://github.com/Hotel-Viciados/WooHoo-Updater/blob/main/changelog.md#
-set s4mp_link=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/main/launcher/online-var/download-links/s4mp_latest.txt
-set hamachi_link=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/main/launcher/online-var/download-links/hamachi_latest.txt
-set network_link=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/main/launcher/online-var/other/networks.txt
-set cloudModVersionLink=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/main/launcher/online-var/versions/mods_cloud_version.txt
-set updaterLink=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/main/launcher/updater.bat
+set github_link=https://github.com/Hotel-Viciados/WooHoo-Updater/tree/spring-2025
+set error_wiki_link=https://github.com/Hotel-Viciados/WooHoo-Updater/blob/spring-2025/error_codes.md#
+set changeLogLink=https://github.com/Hotel-Viciados/WooHoo-Updater/blob/spring-2025/changelog.md#
+set s4mp_link=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/spring-2025/launcher/online-var/download-links/s4mp_latest.txt
+set hamachi_link=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/spring-2025/launcher/online-var/download-links/hamachi_latest.txt
+set network_link=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/spring-2025/launcher/online-var/other/networks.txt
+set cloudModVersionLink=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/spring-2025/launcher/online-var/versions/mods_cloud_version.txt
+set updaterLink=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/spring-2025/launcher/updater.bat
 set /p localModVersion=<"%CD%\launcher_data\localModVersion.txt"
 :CHECKING_SIMS_PATH
 IF EXIST "%CD%\Game\Bin\TS4_x64.exe" (
