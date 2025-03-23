@@ -12,7 +12,7 @@ set github_link=https://github.com/Hotel-Viciados/WooHoo-Updater/tree/spring-202
 set error_wiki_link=https://github.com/Hotel-Viciados/WooHoo-Updater/blob/spring-2025/error_codes.md#
 set changeLogLink=https://github.com/Hotel-Viciados/WooHoo-Updater/blob/spring-2025/changelog.md#
 set s4mp_link=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/spring-2025/launcher/online-var/download-links/s4mp_latest.txt
-set hamachi_link=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/spring-2025/launcher/online-var/download-links/hamachi_latest.txt
+set hamachi_link=https://github.com/Hotel-Viciados/WooHoo-Updater/blob/spring-2025/Hamachi.md
 set network_link=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/spring-2025/launcher/online-var/other/networks.txt
 set cloudModVersionLink=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/spring-2025/launcher/online-var/versions/mods_cloud_version.txt
 set updaterLink=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/spring-2025/launcher/updater.bat
@@ -62,7 +62,10 @@ cls
 echo Comprobando actualizaciones...
 wget --quiet --no-check-certificate "%cloudModVersionLink%" -O mods_cloud_version.txt
 set /p cloudModVersion=<mods_cloud_version.txt
-if %localModVersion%==%cloudModVersion% (set latestMods=true) & GOTO MENU
+if %localModVersion%==%cloudModVersion% (
+    set latestMods=true
+    GOTO MENU
+)
 echo Se han encontrado actualizaciones
 :modpack_update_found
 set latestMods=false
@@ -394,16 +397,8 @@ choice /C cx /N /M ">"
 	if %errorlevel%==2 goto join_network
 :download_hamachi
 cls
-echo No se puede descargar Hamachi directamente desde aquí
-timeout 1 >NUL
-echo Pulsa ENTER para abrir la página de instalación
-pause >NUL
-echo Obteniendo enlace más reciente...
-wget --quiet --no-check-certificate "%hamachi_link%" -O hamachi_link.txt
-timeout 2 >NUL
-start <hamachi_link.txt
-erase /q hamachi_link.txt
-echo Pulsa ENTER cuando hayas terminado con la instalación
+start %hamachi_link%
+echo Pulsa ENTER cuando hayas instalado Hamachi...
 pause >NUL
 goto continue2
 :join_network
