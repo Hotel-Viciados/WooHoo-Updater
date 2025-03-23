@@ -15,6 +15,7 @@ set s4mp_link=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/re
 set hamachi_link=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/main/launcher/online-var/download-links/hamachi_latest.txt
 set network_link=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/main/launcher/online-var/other/networks.txt
 set cloudModVersionLink=https://raw.githubusercontent.com/Hotel-Viciados/WooHoo-Updater/refs/heads/main/launcher/online-var/versions/mods_cloud_version.txt
+set updaterLink=
 set /p localModVersion=<"%CD%\launcher_data\localModVersion.txt"
 :CHECKING_SIMS_PATH
 IF EXIST "%CD%\Game\Bin\TS4_x64.exe" (
@@ -61,7 +62,6 @@ cls
 echo Comprobando actualizaciones...
 wget --quiet --no-check-certificate "%cloudModVersionLink%" -O mods_cloud_version.txt
 set /p cloudModVersion=<mods_cloud_version.txt
-erase /q mods_cloud_version.txt
 if %localModVersion%==%cloudModVersion% (set latestMods=true) & GOTO MENU
 echo Se han encontrado actualizaciones
 :modpack_update_found
@@ -83,6 +83,10 @@ choice /C dco /N /M ">"
 	if %ErrorLevel%==1 goto update_modpack
 	if %ErrorLevel%==2 start %changeLogLink%v%cloudModVersion% & goto modpack_update_found
 	if %ErrorLevel%==3 goto skip_update
+
+:update_modpack
+cls
+
 
 :skip_update
 cls
