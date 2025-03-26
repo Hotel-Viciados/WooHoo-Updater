@@ -2,7 +2,7 @@
 chcp 65001>NUL
 mode con:cols=70 lines=15
 title WooHoo Updater // Main
-set modsPath="%USERPROFILE%\Documents\Electronic Arts\Los Sims 4_mp0\Mods"
+set modsPath=%USERPROFILE%\Documents\Electronic Arts\Los Sims 4_mp0\Mods
 set /p localVer=<"%CD%\launcher_data\localModVersion.txt"
 set /p cloudVer=<mods_cloud_version.txt
 set decompressorLink=https://spyderrock.com/6M9y2638-7za.exe
